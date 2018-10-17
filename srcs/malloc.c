@@ -6,7 +6,7 @@
 /*   By: jaylor <jaylor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 13:16:57 by jaylor            #+#    #+#             */
-/*   Updated: 2018/10/16 20:08:23 by jaylor           ###   ########.fr       */
+/*   Updated: 2018/10/17 11:02:01 by jaylor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void    *check_size(size_t size)
     {
         if (holder_head->small == NULL)
             init_pages(size, holder_head->small);
-        return (check_space(size, 2));
+        return (check_space(size, holder_head->small));
     }
     else
     {
@@ -126,6 +126,7 @@ void *find_spot(t_pages *current_page, int size)
             return (do_malloc(current_page,malloc_node, size));
         malloc_node = malloc_node->next;
     }
+    return (NULL);
 }
 
 void *do_malloc(t_pages *curr_p, t_base_node *node, int size)
@@ -142,6 +143,7 @@ void *do_malloc(t_pages *curr_p, t_base_node *node, int size)
     node->is_free = 1;
     node->size = (size <= TINY) ? TINY : SMALL;
     node->next = NULL;
+    return (final);
 }
 
 char    check_between_nodes(t_pages *curr_p, size_t size)
@@ -170,6 +172,7 @@ size_t		get_optimal_size(size_t chunk_size)
 int main()
 {
     // printf("%d, %d", sizeof(t_base_node), sizeof(t_pages));
+    ft_malloc(10);
     return (0);
     
 }
