@@ -6,7 +6,7 @@
 /*   By: jaylor <jaylor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 13:16:57 by jaylor            #+#    #+#             */
-/*   Updated: 2018/10/17 19:13:21 by jaylor           ###   ########.fr       */
+/*   Updated: 2018/10/17 19:46:23 by jaylor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void    *init_large_page(size_t size, t_pages **head)
 {
     t_pages *real;
    
-    *head = new_mmap(size, 'l');
+    *head = new_mmap(size + sizeof(t_pages), 'l');
     if (*head == NULL)
         return (NULL);
     real = *head;
@@ -94,7 +94,7 @@ void    *large_malloc(size_t size, t_pages *head)
     curr_p = head;
     while (curr_p)
     {
-        if (curr_p->head->is_free == 1 && curr_p->head->size >= size + sizeof(t_pages))
+        if (curr_p->head->is_free == 1 && curr_p->head->size >= size)
             {
                 curr_p->head->is_free = 0;
                 return (curr_p->head); // make sure head is set when make new large page.
@@ -103,7 +103,7 @@ void    *large_malloc(size_t size, t_pages *head)
             break;    
         curr_p = curr_p->next;     
     }
-    curr_p->next = new_mmap(size, 'l');
+    curr_p->next = new_mmap(size + sizeof(t_pages), 'l');
     if (curr_p->next == NULL)
         return (NULL);
     curr_p = curr_p->next;
@@ -236,7 +236,7 @@ int main()
     // printf("%d",getpagesize());
     int i = 0;
     void **hold;
-    int nb_malloc = 140;
+    int nb_malloc = 4;
 
     hold = malloc(sizeof(*hold) * nb_malloc);
     // while (i < 150)
@@ -252,21 +252,26 @@ int main()
     // }
     while (i < nb_malloc)
     {
-        hold[i] = ft_malloc(64);
+        hold[i] = ft_malloc(10000);
+        ft_free(hold[0]);
+        ft_malloc(10000);
+        return (1);
         i++;
     }
     // ft_free(hold[140]);
    
     // // print_ll(0);
     show_alloc_mem();
-    printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
+    // printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
     // i = 0;
-    while (i >= 0)
-    {
-        ft_free(hold[i]);
-        i--;
-    }
-
+    // while (i < nb_malloc)
+    // {
+    //     ft_free(hold[i]);
+    //     i++;
+    // }
+    ft_free(hold[0]);
+    ft_free(hold[1]);
+    ft_free(hold[2]);
     show_alloc_mem();
     // printf("--------\n");
     return (0);

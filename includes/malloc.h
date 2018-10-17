@@ -6,7 +6,7 @@
 /*   By: jaylor <jaylor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 09:10:04 by jaylor            #+#    #+#             */
-/*   Updated: 2018/10/17 17:56:55 by jaylor           ###   ########.fr       */
+/*   Updated: 2018/10/17 19:32:32 by jaylor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ void    print_large(t_pages *head, int *i);
 void    ft_free(void *ptr);
 void    *search_not_large(void *ptr, t_pages *head);
 void    find_node(void *ptr, t_pages *curr_p, int size_of_page, t_pages *prev_p);
+void    *search_large(void *ptr, t_pages *head);
 #endif
 

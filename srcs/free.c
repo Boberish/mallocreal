@@ -6,7 +6,7 @@
 /*   By: jaylor <jaylor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 13:16:57 by jaylor            #+#    #+#             */
-/*   Updated: 2018/10/17 19:12:27 by jaylor           ###   ########.fr       */
+/*   Updated: 2018/10/17 19:44:33 by jaylor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,41 @@ void    ft_free(void *ptr)
         if (search_not_large(ptr, holder_head->small) == NULL)
             return ;
     }
+    if (holder_head->large)
+    {
+        if (search_large(ptr, holder_head->large) == NULL)
+            return ;
+    }
     printf("didnt find %p", ptr);
-    // search_large(ptr, holder_head->large);
+
+}
+
+void    *search_large(void *ptr, t_pages *head)
+{
+    t_pages *curr_p;
+    t_pages *prev_p;
+    int     mun_ret;
+
+    curr_p = head;
+    prev_p = head;
+    while (curr_p)
+    {
+        if (ptr == curr_p->head)
+        {
+            curr_p->head->is_free = 1;
+            if (curr_p == prev_p)
+                return (NULL);
+            else
+            {
+                prev_p->next = curr_p->next;
+                mun_ret = munmap(curr_p, curr_p->head->size);
+                return (NULL);
+            }       
+        }
+        prev_p = curr_p;
+        curr_p = curr_p->next;
+    }
+    return ((void*)1);
 }
 
 void    *search_not_large(void *ptr, t_pages *head)
