@@ -6,7 +6,7 @@
 /*   By: jaylor <jaylor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 13:16:57 by jaylor            #+#    #+#             */
-/*   Updated: 2018/10/17 13:56:03 by jaylor           ###   ########.fr       */
+/*   Updated: 2018/10/17 17:56:56 by jaylor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void            show_alloc_mem()
     }
     print_page(holder_head->tiny, &i);
     print_page(holder_head->small, &i);
+    print_large(holder_head->large, &i);
     ft_putstr("Total : ");
     ft_putnbr(i);
     ft_putstr(" octets \n");
@@ -89,5 +90,27 @@ void    print_page(t_pages *head, int *i)
             if (current_page)
                 current_node = current_page->head;
         }
+    }
+}
+
+void    print_large(t_pages *head, int *i)
+{
+    t_pages *curr_p;
+
+    curr_p = head;
+    if (head)
+    {
+        ft_putstr(("LARGE : "));
+        ft_print_addr(head);
+        ft_putstr("\n");
+    }
+    while (curr_p)
+    {
+        if (curr_p->head->is_free == 0)
+        {
+            print_address_mem(curr_p->head , (void*)curr_p->head + curr_p->head->size , curr_p->head->size);
+            *i += curr_p->head->size;
+        }
+        curr_p = curr_p->next;
     }
 }

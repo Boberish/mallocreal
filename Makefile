@@ -13,6 +13,7 @@ CC 			:= gcc
 
 SRC			+= malloc.c
 SRC			+= show_alloc_mem.c
+SRC			+= free.c
 # SRC			+= free.c
 # SRC			+= show_alloc_mem.c
 
