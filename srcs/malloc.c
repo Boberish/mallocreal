@@ -6,7 +6,7 @@
 /*   By: jaylor <jaylor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 13:16:57 by jaylor            #+#    #+#             */
-/*   Updated: 2018/10/17 11:02:01 by jaylor           ###   ########.fr       */
+/*   Updated: 2018/10/17 13:58:21 by jaylor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void    init_holder()
     holder_head->tiny = NULL;
     holder_head->small = NULL;
     holder_head->large = NULL;
+    holder_head->j = 0;
 }
 
 void    *new_mmap(size_t size)
@@ -47,24 +48,25 @@ void    *check_size(size_t size)
     if (size <= TINY)
     {
         if (holder_head->tiny == NULL)
-            init_pages(size, holder_head->tiny);
-        return (check_space(size,holder_head->tiny));
+            init_pages(size, &(holder_head->tiny));
+        return (check_space(size,&(holder_head->tiny)));
     }
     else if (size <= SMALL)
     {
         if (holder_head->small == NULL)
-            init_pages(size, holder_head->small);
-        return (check_space(size, holder_head->small));
+            init_pages(size, &(holder_head->small));
+        return (check_space(size, &(holder_head->small)));
     }
     else
     {
         if (holder_head->large == NULL)
-            init_pages(size, holder_head->large);
+            // init_pages(size, holder_head->large);
         return (NULL); // do large malloc
     }
+    return (NULL);//check, just added to remove warning
 }
 
-void    init_pages(size_t size, t_pages *head)
+void    init_pages(size_t size, t_pages **head)
 {
     // else if (size_type == 3)
     // {
@@ -77,40 +79,50 @@ void    init_pages(size_t size, t_pages *head)
     //     holder_head->large->head->mem = holder_head->final_mem;
     //     holder_head->large->head->size = size;
     // }
-    head = new_mmap(size);
-    head->head = (t_base_node *)((void *)head + sizeof(t_pages));
-    head->head->next = NULL;
-    head->head->is_free = 1;
-    head->head->size = (head == holder_head->tiny) ? TINY : SMALL;
-    head->aval_mem = get_optimal_size(size) - sizeof(t_pages);
-    head->free_count = 0;
-    head->next = NULL;
+    t_pages *real;
+
+    
+    *head = new_mmap(size);
+    real = *head;
+
+    real->head = (t_base_node *)((void *)real + sizeof(t_pages));
+    real->head->next = NULL;
+    real->head->is_free = 1;
+    real->head->size = (size <= TINY) ? TINY : SMALL;
+    real->aval_mem = get_optimal_size(size) - sizeof(t_pages);
+    real->free_count = 0;
+    real->next = NULL;
 }
 
-void    *check_space(size_t size, t_pages *head)
+void    *check_space(size_t size, t_pages **head)
 {
     t_pages *current_page;
     
-    current_page = head;
+    current_page = *head;
     while (current_page)
     {
         if (current_page->free_count > 0 && check_between_nodes(current_page, size) == 1)
             return (find_spot(current_page, size));
         else if (current_page->aval_mem >= (size + sizeof(t_base_node)))
             return (find_spot(current_page, size));
+        if (current_page->next == NULL)
+            break;
         current_page = current_page->next;
     }
-    return (add_node_pages(current_page, size));
+    return (add_node_pages(current_page, *head, size));
 }
 
-void    *add_node_pages(t_pages *current_page, int size)
+void    *add_node_pages(t_pages *current_page, t_pages *head, int size)
 {
         current_page->next = new_mmap(size);
         current_page = current_page->next;
         current_page->aval_mem = get_optimal_size(size) - sizeof(t_pages);
-        current_page->head = (t_base_node *)((void *)holder_head->tiny + sizeof(t_pages));
+        current_page->head = (t_base_node *)((void *)current_page + sizeof(t_pages));
         // current_page->head = (t_pages *)current_page + 1;
         current_page->free_count = 0;
+        current_page->head->is_free = 1;
+        current_page->head->size = (size <= TINY) ? TINY : SMALL;
+        current_page->head->next = NULL;
         current_page->next = NULL;
         return (find_spot(current_page, size));
 }
@@ -143,6 +155,8 @@ void *do_malloc(t_pages *curr_p, t_base_node *node, int size)
     node->is_free = 1;
     node->size = (size <= TINY) ? TINY : SMALL;
     node->next = NULL;
+    printf("%d ", holder_head->j);
+    holder_head->j += 1;
     return (final);
 }
 
@@ -171,8 +185,40 @@ size_t		get_optimal_size(size_t chunk_size)
 
 int main()
 {
-    // printf("%d, %d", sizeof(t_base_node), sizeof(t_pages));
-    ft_malloc(10);
+    // printf("base node: %d, t_pages: %d", sizeof(t_base_node), sizeof(t_pages));
+    // printf("%d",getpagesize());
+    int i = 0;
+    void **hold;
+
+    hold = malloc(sizeof(*hold) * 1000);
+    while (i < 150)
+    {
+        hold[i] = ft_malloc(1000);
+        i++;
+        // printf("%d ",i);
+    }
+    while (i < 210)
+    {
+        hold[i] = ft_malloc(60);
+        i++;
+    }
+    // while (i < 220)
+    // {
+    //     hold[i] = ft_malloc(2000);
+    //     i++;
+    // }
+    // // print_ll(0);
+    // show_alloc_mem();
+    // printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
+    // i = 0;
+    // while (i < 200)
+    // {
+    //     ft_free(hold[i]);
+    //     i++;
+    // }
+
+    show_alloc_mem();
+    // printf("--------\n");
     return (0);
     
 }
