@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaylor <jaylor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pde-maul <pde-maul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 09:10:04 by jaylor            #+#    #+#             */
-/*   Updated: 2018/10/18 18:43:52 by jaylor           ###   ########.fr       */
+/*   Updated: 2018/10/18 19:43:14 by pde-maul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void    *large_malloc(size_t size, t_pages *head);
 void    *check_space(size_t size, t_pages *head);
 void    *check_size(size_t size);
 void    *init_large_page(size_t size, t_pages **head);
-// void    *malloc(size_t size);
-void	*ft_malloc(size_t size);
+void    *malloc(size_t size);
+// void	*ft_malloc(size_t size);
 
 // void    trav_ll(t_base_node *head);
 // void    print_ll(int what);
@@ -74,15 +74,15 @@ void    print_large(t_pages *head, int *i);
 
 
 ////////FREEE.c
-// void    free(void *ptr);
-void    ft_free(void *ptr);
+void    free(void *ptr);
+// void    ft_free(void *ptr);
 void    *search_not_large(void *ptr, t_pages *head);
 void    find_node(void *ptr, t_pages *curr_p, int size_of_page, t_pages *prev_p);
 void    *search_large(void *ptr, t_pages *head);
 
 ///////////REALLOC.c
-// void 	*realloc(void *ptr, size_t size);
-void 	*ft_realloc(void *ptr, size_t size);
+void 	*realloc(void *ptr, size_t size);
+// void 	*ft_realloc(void *ptr, size_t size);
 void    *find_page(void *ptr, t_pages *head, size_t size);
 void    *find_ptr(void *ptr, t_pages *curr_p, size_t size);
 void    *if_conditions(size_t size, t_base_node *curr_n, void *ptr, t_pages *curr_p);

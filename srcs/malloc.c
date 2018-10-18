@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaylor <jaylor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pde-maul <pde-maul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 13:16:57 by jaylor            #+#    #+#             */
-/*   Updated: 2018/10/18 18:43:04 by jaylor           ###   ########.fr       */
+/*   Updated: 2018/10/18 19:41:44 by pde-maul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_holder *holder_head = NULL;
 
-void    *ft_malloc(size_t size)
-// void    *malloc(size_t size)
+// void    *ft_malloc(size_t size)
+void    *malloc(size_t size)
 {
     if (size == 0)
         return (NULL);
@@ -231,26 +231,26 @@ size_t		get_optimal_size(size_t chunk_size, char letter)
 }
 
 
-#define M (1024 * 1024)
+// #define M (1024 * 1024)
 
-void print(char *s)
-{
-	write(1, s, strlen(s));
-}
+// void print(char *s)
+// {
+// 	write(1, s, strlen(s));
+// }
 
-int main()
-{
-	char *addr1;
-	char *addr3;
+// int main()
+// {
+// 	char *addr1;
+// 	char *addr3;
 
-	addr1 = (char*)ft_malloc(16*M);
-	strcpy(addr1, "Bonjours\n");
-	print(addr1);
-	addr3 = (char*)ft_realloc(addr1, 128*M);
-	addr3[127*M] = 42;
-	print(addr3);
-	return (0);
-}
+// 	addr1 = (char*)ft_malloc(16*M);
+// 	strcpy(addr1, "Bonjours\n");
+// 	print(addr1);
+// 	addr3 = (char*)ft_realloc(addr1, 128*M);
+// 	addr3[127*M] = 42;
+// 	print(addr3);
+// 	return (0);
+// }
 
 
 // int main()

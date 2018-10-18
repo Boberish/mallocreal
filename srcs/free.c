@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaylor <jaylor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pde-maul <pde-maul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 13:16:57 by jaylor            #+#    #+#             */
-/*   Updated: 2018/10/18 18:35:57 by jaylor           ###   ########.fr       */
+/*   Updated: 2018/10/18 19:42:32 by pde-maul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
 
-// void    free(void *ptr)
-void    ft_free(void *ptr)
+void    free(void *ptr)
+// void    ft_free(void *ptr)
 {
     if (!holder_head || ptr == NULL)
         return ;

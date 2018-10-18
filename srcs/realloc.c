@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   realloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaylor <jaylor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pde-maul <pde-maul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 13:16:57 by jaylor            #+#    #+#             */
-/*   Updated: 2018/10/18 18:55:29 by jaylor           ###   ########.fr       */
+/*   Updated: 2018/10/18 19:42:28 by pde-maul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
 
-// void *realloc(void *ptr, size_t size)
-void *ft_realloc(void *ptr, size_t size)
+void *realloc(void *ptr, size_t size)
+// void *ft_realloc(void *ptr, size_t size)
 {
     void *ret;
 
     if (!holder_head)
         return (NULL);
     if (ptr == NULL)
-        // return (malloc(size));
-        return (ft_malloc(size));
+        return (malloc(size));
+        // return (ft_malloc(size));
     else if (size == 0)
-        // free(ptr);
-        ft_free(ptr);
+        free(ptr);
+        // ft_free(ptr);
     else
     {
         ret = find_page(ptr, holder_head->tiny, size);
@@ -81,11 +81,12 @@ void    *dumb_realloc(size_t size, void *ptr)
 {
     void *retmalloc;
 
-    // retmalloc = malloc(size);
-    retmalloc = ft_malloc(size);
-    ft_memcpy(retmalloc, ptr, size);
-    // free(ptr);
-    ft_free(ptr);
+    retmalloc = malloc(size);
+    // retmalloc = ft_malloc(size);
+    // ft_memcpy(retmalloc, ptr, size);
+    ft_strcpy(retmalloc, ptr);
+    free(ptr);
+    // ft_free(ptr);
     return(retmalloc);
 }
 
