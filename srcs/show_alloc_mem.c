@@ -6,7 +6,7 @@
 /*   By: jaylor <jaylor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 13:16:57 by jaylor            #+#    #+#             */
-/*   Updated: 2018/10/17 17:56:56 by jaylor           ###   ########.fr       */
+/*   Updated: 2018/10/18 18:44:17 by jaylor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void            print_address_mem(void *mem1, void* mem2, size_t nb)
 
 void            show_alloc_mem()
 {
-    t_pages     *current_page;
-    t_base_node *current_node;
+    // t_pages     *current_page;
+    // t_base_node *current_node;
     int i;
     i = 0;
     

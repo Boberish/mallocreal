@@ -6,7 +6,7 @@
 /*   By: jaylor <jaylor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 13:16:57 by jaylor            #+#    #+#             */
-/*   Updated: 2018/10/17 19:46:23 by jaylor           ###   ########.fr       */
+/*   Updated: 2018/10/18 18:43:04 by jaylor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_holder *holder_head = NULL;
 
 void    *ft_malloc(size_t size)
+// void    *malloc(size_t size)
 {
     if (size == 0)
         return (NULL);
@@ -150,7 +151,7 @@ void    *check_space(size_t size, t_pages *head)
     return (add_node_pages(current_page, size));
 }
 
-void    *add_node_pages(t_pages *current_page, int size)
+void    *add_node_pages(t_pages *current_page, size_t size)
 {
         current_page->next = new_mmap(size, 's');
         if (current_page->next == NULL)
@@ -167,7 +168,7 @@ void    *add_node_pages(t_pages *current_page, int size)
         return (find_spot(current_page, size));
 }
 
-void *find_spot(t_pages *current_page, int size)
+void *find_spot(t_pages *current_page, size_t size)
 {
     t_base_node *malloc_node;
 
@@ -181,7 +182,7 @@ void *find_spot(t_pages *current_page, int size)
     return (NULL);
 }
 
-void *do_malloc(t_pages *curr_p, t_base_node *node, int size)
+void *do_malloc(t_pages *curr_p, t_base_node *node, size_t size)
 {
     void        *final;
 
@@ -230,53 +231,77 @@ size_t		get_optimal_size(size_t chunk_size, char letter)
 }
 
 
+#define M (1024 * 1024)
+
+void print(char *s)
+{
+	write(1, s, strlen(s));
+}
+
 int main()
 {
-    // printf("base node: %d, t_pages: %d", sizeof(t_base_node), sizeof(t_pages));
-    // printf("%d",getpagesize());
-    int i = 0;
-    void **hold;
-    int nb_malloc = 4;
+	char *addr1;
+	char *addr3;
 
-    hold = malloc(sizeof(*hold) * nb_malloc);
-    // while (i < 150)
-    // {
-    //     hold[i] = ft_malloc(1000);
-    //     i++;
-    //     // printf("%d ",i);
-    // }
-    // while (i < 210)
-    // {
-    //     hold[i] = ft_malloc(60);
-    //     i++;
-    // }
-    while (i < nb_malloc)
-    {
-        hold[i] = ft_malloc(10000);
-        ft_free(hold[0]);
-        ft_malloc(10000);
-        return (1);
-        i++;
-    }
-    // ft_free(hold[140]);
-   
-    // // print_ll(0);
-    show_alloc_mem();
-    // printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
-    // i = 0;
+	addr1 = (char*)ft_malloc(16*M);
+	strcpy(addr1, "Bonjours\n");
+	print(addr1);
+	addr3 = (char*)ft_realloc(addr1, 128*M);
+	addr3[127*M] = 42;
+	print(addr3);
+	return (0);
+}
+
+
+// int main()
+// {
+    // // printf("base node: %d, t_pages: %d", sizeof(t_base_node), sizeof(t_pages));
+    // // printf("%d",getpagesize());
+    // int i = 0;
+    // void **hold;
+    // int nb_malloc = 1;
+
+    // hold = malloc(sizeof(*hold) * nb_malloc);
+    // // while (i < 150)
+    // // {
+    // //     hold[i] = ft_malloc(1000);
+    // //     i++;
+    // //     // printf("%d ",i);
+    // // }
+    // // while (i < 210)
+    // // {
+    // //     hold[i] = ft_malloc(60);
+    // //     i++;
+    // // }
     // while (i < nb_malloc)
     // {
-    //     ft_free(hold[i]);
+    //     hold[i] = ft_malloc(64);
+    //     // ft_free(hold[0]);
+    //     ft_realloc(hold[0],200);
+    //     // ft_realloc(hold[0],110);
+
+    //     return (1);
     //     i++;
     // }
-    ft_free(hold[0]);
-    ft_free(hold[1]);
-    ft_free(hold[2]);
-    show_alloc_mem();
-    // printf("--------\n");
-    return (0);
+    // // ft_free(hold[140]);
+   
+    // // // print_ll(0);
+    // show_alloc_mem();
+    // // printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
+    // // i = 0;
+    // // while (i < nb_malloc)
+    // // {
+    // //     ft_free(hold[i]);
+    // //     i++;
+    // // }
+    // // ft_free(hold[0]);
+    // // ft_free(hold[1]);
+    // // ft_free(hold[2]);
+    // // show_alloc_mem();
+    // // printf("--------\n");
+    // return (0);
     
-}
+// }
 
 
 

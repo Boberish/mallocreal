@@ -1,5 +1,5 @@
 # ifeq ($(HOSTTYPE),)
-	# HOSTTYPE := $(shell uname -m)_$(shell uname -s)
+# 	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
 # endif
 
 
@@ -14,7 +14,7 @@ CC 			:= gcc
 SRC			+= malloc.c
 SRC			+= show_alloc_mem.c
 SRC			+= free.c
-# SRC			+= free.c
+SRC			+= realloc.c
 # SRC			+= show_alloc_mem.c
 
 
@@ -22,14 +22,14 @@ OBJ_PATH 	= ./obj/
 OBJ_NAME 	= $(SRC:.c=.o)
 OBJ 		= $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 
-# CFLAGS		:= -Wall -Wextra -Werror
+# CFLAGS		:= -Wall -Wextra -Werror -fsanitize=address
 
 # To make .o files (-c) in another folder
 # -O0: Optimized for compilation time
 # -g:  generate debugger info
 $(OBJ_PATH)%.o: srcs/%.c
 	mkdir -p $(OBJ_PATH)
-	$(CC) -c -o $@ $(CFLAGS) $^  -g
+	$(CC) -c -o $@ $(CFLAGS) $^  -g 
 	echo -n .
 
 # Make shared library from object files

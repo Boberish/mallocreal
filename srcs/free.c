@@ -6,12 +6,13 @@
 /*   By: jaylor <jaylor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 13:16:57 by jaylor            #+#    #+#             */
-/*   Updated: 2018/10/17 19:44:33 by jaylor           ###   ########.fr       */
+/*   Updated: 2018/10/18 18:35:57 by jaylor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
 
+// void    free(void *ptr)
 void    ft_free(void *ptr)
 {
     if (!holder_head || ptr == NULL)
@@ -31,7 +32,7 @@ void    ft_free(void *ptr)
         if (search_large(ptr, holder_head->large) == NULL)
             return ;
     }
-    printf("didnt find %p", ptr);
+    // printf("didnt find %p", ptr);
 
 }
 
