@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pde-maul <pde-maul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/11 13:16:57 by jaylor            #+#    #+#             */
-/*   Updated: 2018/10/19 14:52:01 by pde-maul         ###   ########.fr       */
+/*   Created: 2018/09/11 13:16:57 by pde-maul          #+#    #+#             */
+/*   Updated: 2018/10/19 15:32:21 by pde-maul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_holder	*g_holder_head = NULL;
 
 void	*malloc(size_t size)
 {
-	if (size == 0)
+	if (size <= 0 || size == __UINT64_MAX__)
 		return (NULL);
 	if (g_holder_head == NULL)
 	{

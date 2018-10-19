@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pde-maul <pde-maul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/29 09:10:04 by jaylor            #+#    #+#             */
-/*   Updated: 2018/10/19 14:42:49 by pde-maul         ###   ########.fr       */
+/*   Created: 2017/05/29 09:10:04 by pde-maul          #+#    #+#             */
+/*   Updated: 2018/10/19 15:05:02 by pde-maul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MALLOC_H
 
 # include <sys/mman.h>
-# include "../libft/includes/libft.h"
 # include <unistd.h>
 
 # define TINY 64
