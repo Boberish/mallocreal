@@ -6,7 +6,7 @@
 #    By: pde-maul <pde-maul@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/07 09:35:25 by jaylor            #+#    #+#              #
-#    Updated: 2018/10/10 15:10:36 by pde-maul         ###   ########.fr        #
+#    Updated: 2018/10/19 13:09:28 by pde-maul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,7 +114,7 @@ LIBFT = $(LIBFT_DIR)/libftprintf.a
 
 all: $(NAME)
 
-$(NAME): $(FILESO) 
+$(NAME): $(FILESO) makefile
 	ar rc $(NAME) $^ 
 
 %.o: srcs/%.c

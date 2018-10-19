@@ -1,0 +1,76 @@
+
+// #define M (1024 * 1024)
+
+// void print(char *s)
+// {
+// 	write(1, s, strlen(s));
+// }
+
+// int main()
+// {
+// 	char *addr1;
+// 	char *addr3;
+
+// 	addr1 = (char*)ft_malloc(16*M);
+// 	strcpy(addr1, "Bonjours\n");
+// 	print(addr1);
+// 	addr3 = (char*)ft_realloc(addr1, 128*M);
+// 	addr3[127*M] = 42;
+// 	print(addr3);
+// 	return (0);
+// }
+
+
+// int main()
+// {
+    // // printf("base node: %d, t_pages: %d", sizeof(t_base_node), sizeof(t_pages));
+    // // printf("%d",getpagesize());
+    // int i = 0;
+    // void **hold;
+    // int nb_malloc = 1;
+
+    // hold = malloc(sizeof(*hold) * nb_malloc);
+    // // while (i < 150)
+    // // {
+    // //     hold[i] = ft_malloc(1000);
+    // //     i++;
+    // //     // printf("%d ",i);
+    // // }
+    // // while (i < 210)
+    // // {
+    // //     hold[i] = ft_malloc(60);
+    // //     i++;
+    // // }
+    // while (i < nb_malloc)
+    // {
+    //     hold[i] = ft_malloc(64);
+    //     // ft_free(hold[0]);
+    //     ft_realloc(hold[0],200);
+    //     // ft_realloc(hold[0],110);
+
+    //     return (1);
+    //     i++;
+    // }
+    // // ft_free(hold[140]);
+   
+    // // // print_ll(0);
+    // show_alloc_mem();
+    // // printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
+    // // i = 0;
+    // // while (i < nb_malloc)
+    // // {
+    // //     ft_free(hold[i]);
+    // //     i++;
+    // // }
+    // // ft_free(hold[0]);
+    // // ft_free(hold[1]);
+    // // ft_free(hold[2]);
+    // // show_alloc_mem();
+    // // printf("--------\n");
+    // return (0);
+    
+// }
+
+
+
+
