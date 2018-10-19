@@ -6,7 +6,7 @@
 /*   By: pde-maul <pde-maul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 09:10:04 by jaylor            #+#    #+#             */
-/*   Updated: 2018/10/19 13:37:00 by pde-maul         ###   ########.fr       */
+/*   Updated: 2018/10/19 14:42:49 by pde-maul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char					*ft_strcpy(char *dest, const char *src);
 */
 void					print_hex(int value);
 void					ft_print_addr(void *addr);
-void					show_alloc_mem();
+void					show_alloc_mem(void);
 void					print_address_mem(void *mem1, void *mem2, size_t nb);
 void					print_page(t_pages *head, int *i);
 void					print_large(t_pages *head, int *i);
